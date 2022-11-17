@@ -33,3 +33,24 @@ class Bmicalculator:
                     bmis=[]
                 bmis.append(bmi)
                 self.datastorage.update({name:bmis})
+    def calculate(self,gr,ge):
+        return round(float(ge)/(float(gr)**2),2)
+    def evaluate(self,b):
+        if b>=25:
+            return 'Übergewicht'
+        elif b<18.5:
+            return 'Untergewicht'
+        else:
+            return 'Normalgewicht'
+    def add(self,n,b):
+        if n in self.datastorage:
+            bmis=self.datastorage[n]
+        else:
+            bmis=[]
+        bmis.append(b)
+        self.datastorage.update({n:bmis})
+        connection=sqlite3.connect('bmi.sqlte')
+        cursor=connection.cursor()
+        cursor.execute('''INSERT INTO bmirechner VALUES(?,?)''',(n,b))
+        connection.commit()
+        connection.close()
