@@ -15,3 +15,21 @@ class User:
 class Bmicalculator:
     def __init__(self):
         self.datastorage={}
+        if not os.path.exists('bmi.sqlte'):
+            connection=sqlite3.connect('bmi.sqlte')
+            cursor=connection.cursor()
+            cursor.execute('''CREATE TABLE bmirechner(name TEXT, bmi REAL)''')
+        else:
+            connection=sqlite3.connect('bmi.sqlte')
+            cursor=connection.cursor()
+            cursor.execute('''SELECT name,bmi FROM bmirechner''')
+            rows=cursor.fetchall()
+            for row in rows:
+                name=row[0]
+                bmi=row[1]
+                if name in self.datastorage:
+                    bmis=self.datastorage[name]
+                else:
+                    bmis=[]
+                bmis.append(bmi)
+                self.datastorage.update({name:bmis})
