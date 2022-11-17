@@ -12,6 +12,6 @@ class User:
 
 # Define class for BMI calculator & connection to SQLite database
 
-class Bmirechner:
+class Bmicalculator:
     def __init__(self):
         self.datastorage={}
