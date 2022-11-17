@@ -37,7 +37,7 @@ class Application(Frame):
     def action(self):
         user=User(
             self.nameFrame.text.get(),
-            self.heightFrame.text.get())
+            self.heigtFrame.text.get())
         bmirechner=Bmicalculator()
         bmi=bmirechner.calculate(
             user.height,
