@@ -30,10 +30,9 @@ def main():
     with conn:
         print("Database connected:")
         df = fetch_table_data_into_df(TABLE_NAME, conn)
-        # reading what you want to do, I presumed you want 
-        # to plot per measuremnt
+        # plot per measurement
         for measurement in df.name.unique():
-            df[df.name == measurement].plot("name", "bmi")
+            df[df.name == measurement].plot("name", "bmi", "date")
             pylab.savefig(f"{measurement}.png")
             pylab.clf()
             pylab.show()
